@@ -109,6 +109,11 @@ export function getGrid(level, mines) {
   return grid;
 }
 
+export function startGame(level) {
+  const mines = getMinesCoordinates(level);
+  return getGrid(level, mines);
+}
+
 export function getCellImage(content) {
   if (content === '*') {
     return imgMine;

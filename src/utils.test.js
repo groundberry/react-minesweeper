@@ -8,6 +8,7 @@ import {
   isMine,
   getCellValue,
   getGrid,
+  startGame,
   getCellImage,
 } from './utils';
 
@@ -121,6 +122,14 @@ describe('utils', () => {
 
     it('returns the length of the grid', () => {
       expect(getGrid(level, mines)).toHaveLength(9);
+    });
+  });
+
+  describe('startGame', () => {
+    const level = 1;
+
+    it('returns an array with the content of every cell in the grid', () => {
+      expect(startGame(level)).toHaveLength(9);
     });
   });
 
