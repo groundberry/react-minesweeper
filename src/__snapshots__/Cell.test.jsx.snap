@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders one cell component 1`] = `
+<React.Fragment>
+  <button
+    className="Cell Cell--button"
+    onClick={[Function]}
+  />
+</React.Fragment>
+`;
