@@ -2,12 +2,22 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import App from './App';
 
-it('renders without crashing', () => {
-  document.createElement('div');
-  shallow(<App />);
-});
+describe('App', () => {
+  let wrapper;
 
-it('renders the name of the app', () => {
-  const wrapper = shallow(<App />);
-  expect(wrapper).toMatchSnapshot();
+  beforeEach(() => {
+    wrapper = shallow(<App />);
+  });
+
+  it('renders the name of the app', () => {
+    expect(wrapper.find('h1').text()).toEqual('Minesweeper');
+  });
+
+  it('renders a Face component', () => {
+    expect(wrapper.find('Face')).toHaveLength(1);
+  });
+
+  it('renders a Grid component', () => {
+    expect(wrapper.find('Grid')).toHaveLength(1);
+  });
 });

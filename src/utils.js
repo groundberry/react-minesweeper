@@ -2,6 +2,8 @@ const imgMine = require('./img/minesweeper_mine.png');
 const img1 = require('./img/minesweeper_1.png');
 const img2 = require('./img/minesweeper_2.png');
 const img3 = require('./img/minesweeper_3.png');
+const imgSmiley = require('./img/minesweeper_smiley_face.png');
+const imgSad = require('./img/minesweeper_sad_face.png');
 
 const configForLevel = {
   1: {
@@ -129,4 +131,8 @@ export function getCellImage(content) {
   }
 
   return '';
+}
+
+export function getStatusImage(gameOver) {
+  return gameOver ? imgSad : imgSmiley;
 }

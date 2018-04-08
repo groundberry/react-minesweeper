@@ -15,9 +15,15 @@ class Cell extends Component {
   }
 
   handleClickShowContent() {
+    const { content, onClickMine } = this.props;
+
     this.setState({
       showContent: true,
     });
+
+    if (content === '*') {
+      onClickMine();
+    }
   }
 
   render() {
@@ -45,6 +51,7 @@ class Cell extends Component {
 
 Cell.propTypes = {
   content: PropTypes.string.isRequired,
+  onClickMine: PropTypes.func.isRequired,
 };
 
 export default Cell;

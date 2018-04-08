@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Face renders a sad face when game over 1`] = `
+<button
+  className="Face Face--button Face--image"
+  onClick={[Function]}
+  style={
+    Object {
+      "backgroundImage": "url(minesweeper_sad_face.png)",
+    }
+  }
+/>
+`;
+
+exports[`Face renders a smiley face when not game over 1`] = `
+<button
+  className="Face Face--button Face--image"
+  onClick={[Function]}
+  style={
+    Object {
+      "backgroundImage": "url(minesweeper_smiley_face.png)",
+    }
+  }
+/>
+`;

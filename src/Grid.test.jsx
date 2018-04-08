@@ -16,8 +16,14 @@ describe('<Grid />', () => {
       ['0', '0', '1', '1', '2', '1', '1', '0', '0'],
       ['0', '0', '1', '*', '1', '0', '1', '2', '2'],
       ['0', '0', '1', '1', '1', '0', '1', '*', '*']];
+    const onClickMine = jest.fn();
+    const onClickCell = jest.fn();
 
-    wrapper = shallow(<Grid grid={grid} />);
+    wrapper = shallow(<Grid
+      grid={grid}
+      onClickMine={onClickMine}
+      onClickCell={onClickCell}
+    />);
   });
 
   it('renders a grid component', () => {

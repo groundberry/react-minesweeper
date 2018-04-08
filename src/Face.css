@@ -1,0 +1,27 @@
+.Face {
+  margin: 30px auto 0;
+  height: 50px;
+  width: 50px;
+}
+
+.Face--button {
+  background-color: #ccc;
+  border-color: #d8d8d8;
+  border-style: outset;
+  border-width: medium;
+  color: #000;
+  text-align: center;
+}
+
+.Face--button:hover {
+  background-color: #dcdcdc;
+  border-color: #d0d0d0;
+  border-style: outset;
+  border-width: medium;
+  cursor: pointer;
+}
+
+.Face--image {
+  background-color: #ccc;
+  background-size: 100% 100%;
+}
