@@ -18,11 +18,23 @@ describe('<Grid />', () => {
       ['0', '0', '1', '1', '1', '0', '1', '*', '*']];
     const onClickMine = jest.fn();
     const onClickCell = jest.fn();
+    const pressedGrid = [
+      [false, false, false, false, false, false, false, false, false],
+      [false, false, false, false, false, false, false, false, false],
+      [false, false, false, false, false, false, false, false, false],
+      [false, false, false, false, false, false, false, false, false],
+      [false, false, false, false, false, false, false, false, false],
+      [false, false, false, false, false, false, false, false, false],
+      [false, false, false, false, false, false, false, false, false],
+      [false, false, false, false, false, false, false, false, false],
+      [false, false, false, false, false, false, false, false, false],
+    ];
 
     wrapper = shallow(<Grid
       grid={grid}
       onClickMine={onClickMine}
       onClickCell={onClickCell}
+      pressedGrid={pressedGrid}
     />);
   });
 

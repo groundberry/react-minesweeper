@@ -1,34 +1,32 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { getCellImage } from './utils';
+import { getCellImage } from './utils/cell';
 import './Cell.css';
 
 class Cell extends Component {
   constructor() {
     super();
 
-    this.state = {
-      showContent: false,
-    };
-
     this.handleClickShowContent = this.handleClickShowContent.bind(this);
   }
 
   handleClickShowContent() {
-    const { content, onClickMine } = this.props;
-
-    this.setState({
-      showContent: true,
-    });
+    const {
+      coordinates,
+      content,
+      onClickCell,
+      onClickMine,
+    } = this.props;
 
     if (content === '*') {
       onClickMine();
     }
+
+    onClickCell(coordinates);
   }
 
   render() {
-    const { content } = this.props;
-    const { showContent } = this.state;
+    const { content, showContent } = this.props;
     const img = getCellImage(content);
 
     return (
@@ -50,7 +48,10 @@ class Cell extends Component {
 }
 
 Cell.propTypes = {
+  coordinates: PropTypes.arrayOf(PropTypes.number).isRequired,
   content: PropTypes.string.isRequired,
+  showContent: PropTypes.bool.isRequired,
+  onClickCell: PropTypes.func.isRequired,
   onClickMine: PropTypes.func.isRequired,
 };
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { getStatusImage } from './utils';
+import { getStatusImage } from './utils/game';
 import './Face.css';
 
 function Face(props) {

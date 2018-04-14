@@ -12,15 +12,26 @@ class Grid extends Component {
 
   renderCells() {
     const arrayOfCells = [];
-    const { grid, onClickMine } = this.props;
+    const {
+      grid,
+      onClickCell,
+      onClickMine,
+      pressedGrid,
+    } = this.props;
 
     for (let row = 0, height = grid.length; row < height; row += 1) {
       for (let col = 0, width = grid[row].length; col < width; col += 1) {
         const cellIndex = col + (row * width);
-        const cellContent = grid[row][col];
+        const cellContent = (grid[row][col]).toString();
+        const coordinates = [row, col];
+        const showContent = pressedGrid[row][col];
+
         arrayOfCells.push(<Cell
           key={cellIndex}
+          coordinates={coordinates}
           content={cellContent}
+          showContent={showContent}
+          onClickCell={onClickCell}
           onClickMine={onClickMine}
         />);
       }
@@ -45,7 +56,9 @@ class Grid extends Component {
 
 Grid.propTypes = {
   grid: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)).isRequired,
+  onClickCell: PropTypes.func.isRequired,
   onClickMine: PropTypes.func.isRequired,
+  pressedGrid: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.bool)).isRequired,
 };
 
 export default Grid;
