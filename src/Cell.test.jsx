@@ -3,19 +3,92 @@ import { shallow } from 'enzyme';
 import Cell from './Cell';
 
 describe('Cell', () => {
-  it('renders one cell component', () => {
-    const onClickMine = jest.fn();
-    const onClickCell = jest.fn();
-    const coordinates = [0, 1];
-    const showContent = false;
+  let onClickMine;
+  let onClickCell;
+  let wrapper;
 
-    const wrapper = shallow(<Cell
-      content="1"
-      coordinates={coordinates}
-      onClickMine={onClickMine}
-      onClickCell={onClickCell}
-      showContent={showContent}
-    />);
-    expect(wrapper).toMatchSnapshot();
+  beforeEach(() => {
+    onClickMine = jest.fn();
+    onClickCell = jest.fn();
+  });
+
+  describe('when the game is not over', () => {
+    describe('with a normal cell', () => {
+      beforeEach(() => {
+        wrapper = shallow(<Cell
+          content="1"
+          coordinates={[0, 1]}
+          gameOver={false}
+          onClickMine={onClickMine}
+          onClickCell={onClickCell}
+          showContent={false}
+        />);
+      });
+
+      it('renders one cell component', () => {
+        expect(wrapper).toMatchSnapshot();
+      });
+
+      describe('when clicking', () => {
+        it('calls the onClickCell callback', () => {
+          wrapper.find('.Cell--button').simulate('click');
+          expect(onClickCell).toHaveBeenCalled();
+        });
+
+        it('does not call the onClickMine callback', () => {
+          wrapper.find('.Cell--button').simulate('click');
+          expect(onClickMine).not.toHaveBeenCalled();
+        });
+      });
+    });
+
+    describe('with a mine', () => {
+      beforeEach(() => {
+        wrapper = shallow(<Cell
+          content="*"
+          coordinates={[0, 1]}
+          gameOver={false}
+          onClickMine={onClickMine}
+          onClickCell={onClickCell}
+          showContent={false}
+        />);
+      });
+
+      describe('when clicking', () => {
+        it('calls the onClickCell callback', () => {
+          wrapper.find('.Cell--button').simulate('click');
+          expect(onClickCell).toHaveBeenCalled();
+        });
+
+        it('calls the onClickMine callback', () => {
+          wrapper.find('.Cell--button').simulate('click');
+          expect(onClickMine).toHaveBeenCalled();
+        });
+      });
+    });
+  });
+
+  describe('when the game is over', () => {
+    beforeEach(() => {
+      wrapper = shallow(<Cell
+        content="*"
+        coordinates={[0, 1]}
+        gameOver
+        onClickMine={onClickMine}
+        onClickCell={onClickCell}
+        showContent={false}
+      />);
+    });
+
+    describe('when clicking', () => {
+      it('does not call the onClickCell callback', () => {
+        wrapper.find('.Cell--button').simulate('click');
+        expect(onClickCell).not.toHaveBeenCalled();
+      });
+
+      it('does not call the onClickMine callback when a mine is clicked', () => {
+        expect(onClickMine).not.toHaveBeenCalled();
+      });
+    });
   });
 });

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Cell renders one cell component 1`] = `
+exports[`Cell when the game is not over with a normal cell renders one cell component 1`] = `
 <React.Fragment>
   <button
     className="Cell Cell--button"

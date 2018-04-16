@@ -6,6 +6,7 @@ describe('<Grid />', () => {
   let wrapper;
 
   beforeEach(() => {
+    const gameOver = false;
     const grid = [
       ['*', '1', '1', '1', '2', '*', '1', '0', '0'],
       ['1', '1', '1', '*', '2', '1', '1', '1', '1'],
@@ -31,6 +32,7 @@ describe('<Grid />', () => {
     ];
 
     wrapper = shallow(<Grid
+      gameOver={gameOver}
       grid={grid}
       onClickMine={onClickMine}
       onClickCell={onClickCell}

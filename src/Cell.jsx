@@ -14,9 +14,14 @@ class Cell extends Component {
     const {
       coordinates,
       content,
+      gameOver,
       onClickCell,
       onClickMine,
     } = this.props;
+
+    if (gameOver) {
+      return;
+    }
 
     if (content === '*') {
       onClickMine();
@@ -50,6 +55,7 @@ class Cell extends Component {
 Cell.propTypes = {
   coordinates: PropTypes.arrayOf(PropTypes.number).isRequired,
   content: PropTypes.string.isRequired,
+  gameOver: PropTypes.bool.isRequired,
   showContent: PropTypes.bool.isRequired,
   onClickCell: PropTypes.func.isRequired,
   onClickMine: PropTypes.func.isRequired,

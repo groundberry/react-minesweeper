@@ -74,6 +74,7 @@ class App extends Component {
         />
         <Grid
           level={level}
+          gameOver={gameOver}
           grid={grid}
           onClickCell={this.handleClickPressedCell}
           onClickMine={this.handleClickGameOver}

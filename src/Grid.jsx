@@ -13,6 +13,7 @@ class Grid extends Component {
   renderCells() {
     const arrayOfCells = [];
     const {
+      gameOver,
       grid,
       onClickCell,
       onClickMine,
@@ -30,6 +31,7 @@ class Grid extends Component {
           key={cellIndex}
           coordinates={coordinates}
           content={cellContent}
+          gameOver={gameOver}
           showContent={showContent}
           onClickCell={onClickCell}
           onClickMine={onClickMine}
@@ -55,6 +57,7 @@ class Grid extends Component {
 }
 
 Grid.propTypes = {
+  gameOver: PropTypes.bool.isRequired,
   grid: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)).isRequired,
   onClickCell: PropTypes.func.isRequired,
   onClickMine: PropTypes.func.isRequired,
