@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
-import Grid from './Grid';
+import LevelOptions from './LevelOptions';
 import Face from './Face';
+import Grid from './Grid';
 import { cloneGrid } from './utils/array';
 import { startGame, getPressedGrid, getGrid } from './utils/grid';
 import { getMinesCoordinates } from './utils/mine';
+import changeLevel from './actions/changeLevel';
 import './App.css';
 
 class App extends Component {
@@ -21,9 +23,15 @@ class App extends Component {
       gameOver: false,
     };
 
+    this.handleChangeSelectLevel = this.handleChangeSelectLevel.bind(this);
     this.handleClickPressedCell = this.handleClickPressedCell.bind(this);
     this.handleClickGameOver = this.handleClickGameOver.bind(this);
     this.handleClickRestartGame = this.handleClickRestartGame.bind(this);
+  }
+
+  handleChangeSelectLevel(e) {
+    const level = parseInt(e.target.value, 10);
+    this.setState(changeLevel(level));
   }
 
   handleClickPressedCell([row, col]) {
@@ -68,6 +76,10 @@ class App extends Component {
         <header className="App-header">
           <h1 className="App-title">Minesweeper</h1>
         </header>
+        <LevelOptions
+          level={level}
+          onChange={this.handleChangeSelectLevel}
+        />
         <Face
           gameOver={gameOver}
           onClick={this.handleClickRestartGame}

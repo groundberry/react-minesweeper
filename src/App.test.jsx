@@ -14,6 +14,10 @@ describe('App', () => {
   });
 
   it('renders a Face component', () => {
+    expect(wrapper.find('LevelOptions')).toHaveLength(1);
+  });
+
+  it('renders a Face component', () => {
     expect(wrapper.find('Face')).toHaveLength(1);
   });
 

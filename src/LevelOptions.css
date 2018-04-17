@@ -1,0 +1,9 @@
+.LevelOptions {
+  display: block;
+  margin: 20px auto;
+  width: 100%;
+}
+
+.LevelOptions-select {
+  padding-left: 20px;
+}
