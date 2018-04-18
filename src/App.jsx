@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import LevelOptions from './LevelOptions';
 import Face from './Face';
+import Timer from './Timer';
 import Grid from './Grid';
 import { cloneGrid } from './utils/array';
 import { startGame, getPressedGrid, getGrid } from './utils/grid';
@@ -21,6 +22,8 @@ class App extends Component {
       grid,
       pressedGrid,
       gameOver: false,
+      startTime: null,
+      endTime: null,
     };
 
     this.handleChangeSelectLevel = this.handleChangeSelectLevel.bind(this);
@@ -39,8 +42,16 @@ class App extends Component {
       const newPressedGrid = cloneGrid(prevState.pressedGrid);
       newPressedGrid[row][col] = true;
 
+      let start;
+      if (prevState.startTime === null) {
+        start = Date.now();
+      } else {
+        start = prevState.startTime;
+      }
+
       return {
         pressedGrid: newPressedGrid,
+        startTime: start,
       };
     });
   }
@@ -48,6 +59,7 @@ class App extends Component {
   handleClickGameOver() {
     this.setState({
       gameOver: true,
+      endTime: Date.now(),
     });
   }
 
@@ -59,6 +71,8 @@ class App extends Component {
         grid: getGrid(level, mines),
         pressedGrid: getPressedGrid(level),
         gameOver: false,
+        startTime: null,
+        endTime: null,
       };
     });
   }
@@ -69,6 +83,8 @@ class App extends Component {
       gameOver,
       level,
       pressedGrid,
+      startTime,
+      endTime,
     } = this.state;
 
     return (
@@ -83,6 +99,10 @@ class App extends Component {
         <Face
           gameOver={gameOver}
           onClick={this.handleClickRestartGame}
+        />
+        <Timer
+          startTime={startTime}
+          endTime={endTime}
         />
         <Grid
           level={level}

@@ -1,0 +1,8 @@
+.Time {
+  background-color: #000;
+  border: solid #ccc;
+  font-family: 'VT323', monospace;
+  font-size: 1.2em;
+  color: #f00;
+  padding: 5px;
+}
