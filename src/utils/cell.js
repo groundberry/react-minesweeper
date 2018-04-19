@@ -6,9 +6,18 @@ import {
 import { isMine } from './mine';
 
 const imgMine = require('../img/minesweeper_mine.png');
+const imgBlank = require('../img/minesweeper_blank.png');
 const img1 = require('../img/minesweeper_1.png');
 const img2 = require('../img/minesweeper_2.png');
 const img3 = require('../img/minesweeper_3.png');
+
+const imageMap = {
+  '*': imgMine,
+  0: imgBlank,
+  1: img1,
+  2: img2,
+  3: img3,
+};
 
 export function getCellValue(level, mines, cell) {
   const width = getWidth(level);
@@ -36,18 +45,5 @@ export function getCellValue(level, mines, cell) {
 }
 
 export function getCellImage(content) {
-  if (content === '*') {
-    return imgMine;
-  }
-  if (content === '1') {
-    return img1;
-  }
-  if (content === '2') {
-    return img2;
-  }
-  if (content === '3') {
-    return img3;
-  }
-
-  return '';
+  return imageMap[content];
 }

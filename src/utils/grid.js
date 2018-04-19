@@ -33,6 +33,11 @@ export function getPressedGrid(level) {
   return getCustomGrid(level, customizer);
 }
 
+export function getDiscoveredGrid(level) {
+  const customizer = () => true;
+  return getCustomGrid(level, customizer);
+}
+
 export function startGame(level) {
   const mines = getMinesCoordinates(level);
   return getGrid(level, mines);

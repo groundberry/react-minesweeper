@@ -4,7 +4,7 @@ import Face from './Face';
 import Timer from './Timer';
 import Grid from './Grid';
 import { cloneGrid } from './utils/array';
-import { startGame, getPressedGrid, getGrid } from './utils/grid';
+import { startGame, getPressedGrid, getGrid, getDiscoveredGrid } from './utils/grid';
 import { getMinesCoordinates } from './utils/mine';
 import changeLevel from './actions/changeLevel';
 import './App.css';
@@ -57,9 +57,14 @@ class App extends Component {
   }
 
   handleClickGameOver() {
-    this.setState({
-      gameOver: true,
-      endTime: Date.now(),
+    this.setState((prevState) => {
+      const { level } = prevState;
+
+      return {
+        gameOver: true,
+        endTime: Date.now(),
+        pressedGrid: getDiscoveredGrid(level),
+      };
     });
   }
 

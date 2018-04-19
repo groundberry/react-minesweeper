@@ -2,6 +2,7 @@ import {
   getCustomGrid,
   getGrid,
   getPressedGrid,
+  getDiscoveredGrid,
   startGame,
 } from './grid';
 
@@ -81,6 +82,29 @@ describe('grid', () => {
 
     it('returns the length of the grid', () => {
       expect(getPressedGrid(level)).toHaveLength(9);
+    });
+  });
+
+  describe('getDiscoveredGrid', () => {
+    const level = 1;
+    const result = [
+      [true, true, true, true, true, true, true, true, true],
+      [true, true, true, true, true, true, true, true, true],
+      [true, true, true, true, true, true, true, true, true],
+      [true, true, true, true, true, true, true, true, true],
+      [true, true, true, true, true, true, true, true, true],
+      [true, true, true, true, true, true, true, true, true],
+      [true, true, true, true, true, true, true, true, true],
+      [true, true, true, true, true, true, true, true, true],
+      [true, true, true, true, true, true, true, true, true],
+    ];
+
+    it('returns an array with the content of every cell in the grid', () => {
+      expect(getDiscoveredGrid(level)).toEqual(result);
+    });
+
+    it('returns the length of the grid', () => {
+      expect(getDiscoveredGrid(level)).toHaveLength(9);
     });
   });
 
