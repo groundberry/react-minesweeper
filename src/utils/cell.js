@@ -1,8 +1,5 @@
-import {
-  getWidth,
-  getHeight,
-} from './config';
-
+import { getWidth, getHeight } from './config';
+import { isPresent } from './array';
 import { isMine } from './mine';
 
 const imgMine = require('../img/minesweeper_mine.png');
@@ -46,4 +43,69 @@ export function getCellValue(level, mines, cell) {
 
 export function getCellImage(content) {
   return imageMap[content];
+}
+
+export function hasNeighboringMines(grid, cell) {
+  const row = cell[0];
+  const col = cell[1];
+
+  if (grid[row][col] !== '0') {
+    return true;
+  }
+
+  return false;
+}
+
+export function getNeighboringCells(grid, selectedCell) {
+  const width = grid[0].length;
+  const height = grid.length;
+  const selectedRow = selectedCell[0];
+  const selectedCol = selectedCell[1];
+
+  const cellStartRow = Math.max(0, selectedRow - 1);
+  const cellEndRow = Math.min(height - 1, selectedRow + 1);
+  const cellStartColumn = Math.max(0, selectedCol - 1);
+  const cellEndColumn = Math.min(width - 1, selectedCol + 1);
+  const neighboringCells = [];
+
+  for (let row = cellStartRow; row <= cellEndRow; row += 1) {
+    for (let col = cellStartColumn; col <= cellEndColumn; col += 1) {
+      if (selectedRow !== row || selectedCol !== col
+      ) {
+        neighboringCells.push([row, col]);
+      }
+    }
+  }
+
+  return neighboringCells;
+}
+
+export function getExpandedNeighboringCells(grid, cell) {
+  const neighboringCells = getNeighboringCells(grid, cell);
+  const visitedCells = [];
+
+  while (neighboringCells.length > 0) {
+    const currentCell = neighboringCells.shift();
+    const row = currentCell[0];
+    const col = currentCell[1];
+
+    if (!isPresent(visitedCells, [row, col])) {
+      visitedCells.push([row, col]);
+    }
+
+    const neighboringCellsToVisit = [];
+
+    if (grid[row][col] === '0') {
+      const currentCellNeighboringCells = getNeighboringCells(grid, currentCell);
+
+      for (let i = 0; i < currentCellNeighboringCells.length; i += 1) {
+        const currentNeighboringCell = currentCellNeighboringCells[i];
+        if (!isPresent(visitedCells, currentNeighboringCell)) {
+          neighboringCellsToVisit.push(currentNeighboringCell);
+        }
+      }
+      neighboringCells.push(...neighboringCellsToVisit);
+    }
+  }
+  return visitedCells;
 }

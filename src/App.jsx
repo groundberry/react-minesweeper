@@ -6,6 +6,7 @@ import Grid from './Grid';
 import { cloneGrid } from './utils/array';
 import { startGame, getPressedGrid, getGrid, getDiscoveredGrid } from './utils/grid';
 import { getMinesCoordinates } from './utils/mine';
+import { getExpandedNeighboringCells } from './utils/cell';
 import changeLevel from './actions/changeLevel';
 import './App.css';
 
@@ -38,9 +39,24 @@ class App extends Component {
   }
 
   handleClickPressedCell([row, col]) {
+    const { grid } = this.state;
+
     this.setState((prevState) => {
       const newPressedGrid = cloneGrid(prevState.pressedGrid);
       newPressedGrid[row][col] = true;
+      if (grid[row][col] === '0') {
+        const cell = [row, col];
+        const expandedNeighboringCells = getExpandedNeighboringCells(grid, cell);
+        let cellRow;
+        let cellCol;
+
+        for (let i = 0; i < expandedNeighboringCells.length; i += 1) {
+          [cellRow, cellCol] = [expandedNeighboringCells[i][0], expandedNeighboringCells[i][1]];
+          if (grid[cellRow][cellCol] !== '*') {
+            newPressedGrid[cellRow][cellCol] = true;
+          }
+        }
+      }
 
       let start;
       if (prevState.startTime === null) {

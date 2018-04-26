@@ -1,4 +1,7 @@
-import { cloneGrid } from './array';
+import {
+  cloneGrid,
+  isPresent,
+} from './array';
 
 describe('array', () => {
   describe('cloneGrid', () => {
@@ -7,6 +10,19 @@ describe('array', () => {
 
     it('returns a copy of the original bidimensional array', () => {
       expect(cloneGrid(array)).toEqual(copy);
+    });
+  });
+
+  describe('isPresent', () => {
+    const array = [[0, 0], [0, 1], [0, 2]];
+    it('returns true if the cell is in the array', () => {
+      const cell = [0, 0];
+      expect(isPresent(array, cell)).toBe(true);
+    });
+
+    it('returns false if the cell is not in the array', () => {
+      const cell = [1, 0];
+      expect(isPresent(array, cell)).toBe(false);
     });
   });
 });
