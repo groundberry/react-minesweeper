@@ -7,6 +7,11 @@ const imgBlank = require('../img/minesweeper_blank.png');
 const img1 = require('../img/minesweeper_1.png');
 const img2 = require('../img/minesweeper_2.png');
 const img3 = require('../img/minesweeper_3.png');
+const img4 = require('../img/minesweeper_4.png');
+const img5 = require('../img/minesweeper_5.png');
+const img6 = require('../img/minesweeper_6.png');
+const img7 = require('../img/minesweeper_7.png');
+const img8 = require('../img/minesweeper_8.png');
 
 const imageMap = {
   '*': imgMine,
@@ -14,6 +19,11 @@ const imageMap = {
   1: img1,
   2: img2,
   3: img3,
+  4: img4,
+  5: img5,
+  6: img6,
+  7: img7,
+  8: img8,
 };
 
 export function getCellValue(level, mines, cell) {
