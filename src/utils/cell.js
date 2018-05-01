@@ -3,6 +3,7 @@ import { isPresent } from './array';
 import { isMine } from './mine';
 
 const imgMine = require('../img/minesweeper_mine.png');
+const imgFlag = require('../img/minesweeper_flag.png');
 const imgBlank = require('../img/minesweeper_blank.png');
 const img1 = require('../img/minesweeper_1.png');
 const img2 = require('../img/minesweeper_2.png');
@@ -15,6 +16,7 @@ const img8 = require('../img/minesweeper_8.png');
 
 const imageMap = {
   '*': imgMine,
+  f: imgFlag,
   0: imgBlank,
   1: img1,
   2: img2,

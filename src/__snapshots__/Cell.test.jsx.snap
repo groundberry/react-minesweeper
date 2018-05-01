@@ -3,8 +3,14 @@
 exports[`Cell when the game is not over with a normal cell renders one cell component 1`] = `
 <React.Fragment>
   <button
-    className="Cell Cell--button"
+    className="Cell Cell--button Cell--image"
     onClick={[Function]}
+    onContextMenu={[Function]}
+    style={
+      Object {
+        "backgroundImage": "url(false)",
+      }
+    }
   />
 </React.Fragment>
 `;
