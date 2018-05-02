@@ -66,5 +66,28 @@ describe('Cell', () => {
         });
       });
     });
+
+    describe('when a cell is flagged', () => {
+      beforeEach(() => {
+        wrapper = shallow(<Cell
+          content="*"
+          coordinates={[0, 1]}
+          gameOver={false}
+          onClickMine={onClickMine}
+          onClickCell={onClickCell}
+          showContent={false}
+        />);
+      });
+
+      it('does not call the onClickCell callback', () => {
+        wrapper.setState({ flagged: true });
+        wrapper.find('.Cell--button').simulate('click');
+        expect(onClickCell).not.toHaveBeenCalled();
+      });
+
+      it('does not call the onClickMine callback when a mine is clicked', () => {
+        expect(onClickMine).not.toHaveBeenCalled();
+      });
+    });
   });
 });
