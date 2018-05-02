@@ -67,28 +67,4 @@ describe('Cell', () => {
       });
     });
   });
-
-  describe('when the game is over', () => {
-    beforeEach(() => {
-      wrapper = shallow(<Cell
-        content="*"
-        coordinates={[0, 1]}
-        gameOver
-        onClickMine={onClickMine}
-        onClickCell={onClickCell}
-        showContent={false}
-      />);
-    });
-
-    describe('when clicking', () => {
-      it('does not call the onClickCell callback', () => {
-        wrapper.find('.Cell--button').simulate('click');
-        expect(onClickCell).not.toHaveBeenCalled();
-      });
-
-      it('does not call the onClickMine callback when a mine is clicked', () => {
-        expect(onClickMine).not.toHaveBeenCalled();
-      });
-    });
-  });
 });
