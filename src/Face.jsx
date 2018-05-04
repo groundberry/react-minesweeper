@@ -3,9 +3,17 @@ import PropTypes from 'prop-types';
 import { getStatusImage } from './utils/game';
 import './Face.css';
 
+const imgCool = require('./img/minesweeper_cool_face.png');
+
 function Face(props) {
-  const { gameOver, onClick } = props;
-  const img = getStatusImage(gameOver);
+  const { gameOver, winGame, onClick } = props;
+  let img = null;
+
+  if (winGame) {
+    img = imgCool;
+  } else {
+    img = getStatusImage(gameOver);
+  }
 
   return (
     <button
@@ -18,11 +26,13 @@ function Face(props) {
 
 Face.propTypes = {
   gameOver: PropTypes.bool,
+  winGame: PropTypes.bool,
   onClick: PropTypes.func.isRequired,
 };
 
 Face.defaultProps = {
   gameOver: false,
+  winGame: false,
 };
 
 export default Face;

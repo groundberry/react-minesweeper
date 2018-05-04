@@ -8,6 +8,8 @@ import { startGame, getPressedGrid, getGrid, getDiscoveredGrid } from './utils/g
 import { getMinesCoordinates } from './utils/mine';
 import { getExpandedNeighboringCells } from './utils/cell';
 import changeLevel from './actions/changeLevel';
+import { countClickedCells } from './actions/countClickedCells';
+import { isWinner } from './actions/isWinner';
 import './App.css';
 
 class App extends Component {
@@ -23,6 +25,7 @@ class App extends Component {
       grid,
       pressedGrid,
       gameOver: false,
+      winGame: false,
       startTime: null,
       endTime: null,
     };
@@ -39,10 +42,11 @@ class App extends Component {
   }
 
   handleClickPressedCell([row, col]) {
-    const { grid } = this.state;
+    const { level, grid } = this.state;
 
     this.setState((prevState) => {
       const newPressedGrid = cloneGrid(prevState.pressedGrid);
+
       newPressedGrid[row][col] = true;
       if (grid[row][col] === '0') {
         const cell = [row, col];
@@ -65,9 +69,21 @@ class App extends Component {
         start = prevState.startTime;
       }
 
+      const cellsClicked = countClickedCells(newPressedGrid);
+      const winGame = isWinner(level, cellsClicked);
+
+      let end;
+      if (winGame) {
+        end = Date.now();
+      } else {
+        end = null;
+      }
+
       return {
         pressedGrid: newPressedGrid,
         startTime: start,
+        winGame,
+        endTime: end,
       };
     });
   }
@@ -102,6 +118,7 @@ class App extends Component {
     const {
       grid,
       gameOver,
+      winGame,
       level,
       pressedGrid,
       startTime,
@@ -119,6 +136,7 @@ class App extends Component {
         />
         <Face
           gameOver={gameOver}
+          winGame={winGame}
           onClick={this.handleClickRestartGame}
         />
         <Timer

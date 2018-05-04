@@ -19,6 +19,11 @@ describe('Face', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
+  it('renders a cool face when win game', () => {
+    const wrapper = shallow(<Face gameOver winGame onClick={onClick} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
   it('calls the onClick callback when clicked', () => {
     const wrapper = shallow(<Face onClick={onClick} />);
     wrapper.simulate('click');
