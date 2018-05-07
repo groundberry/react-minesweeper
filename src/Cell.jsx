@@ -7,24 +7,20 @@ class Cell extends Component {
   constructor() {
     super();
 
-    this.state = {
-      flagged: false,
-    };
-
     this.handleClickShowContent = this.handleClickShowContent.bind(this);
     this.handleClickShowFlag = this.handleClickShowFlag.bind(this);
   }
 
   handleClickShowContent() {
-    const { flagged } = this.state;
     const {
       coordinates,
       content,
+      flaggedCell,
       onClickCell,
       onClickMine,
     } = this.props;
 
-    if (flagged) {
+    if (flaggedCell) {
       return;
     }
 
@@ -38,14 +34,19 @@ class Cell extends Component {
   handleClickShowFlag(evt) {
     evt.preventDefault();
 
-    this.setState(prevState => ({ flagged: !prevState.flagged }));
+    const {
+      coordinates,
+      onClickFlagCell,
+    } = this.props;
+
+    onClickFlagCell(coordinates);
   }
 
   render() {
-    const { flagged } = this.state;
-    const { content, showContent } = this.props;
+    const { content, showContent, flaggedCell } = this.props;
     const pressedImg = getCellImage(content);
-    const flagImg = flagged && getCellImage('f');
+    const flaggedCellImage = getCellImage('f');
+    const flagImg = flaggedCell && flaggedCellImage;
 
     return (
       <Fragment>
@@ -71,7 +72,9 @@ Cell.propTypes = {
   coordinates: PropTypes.arrayOf(PropTypes.number).isRequired,
   content: PropTypes.string.isRequired,
   showContent: PropTypes.bool.isRequired,
+  flaggedCell: PropTypes.bool.isRequired,
   onClickCell: PropTypes.func.isRequired,
+  onClickFlagCell: PropTypes.func.isRequired,
   onClickMine: PropTypes.func.isRequired,
 };
 

@@ -19,7 +19,19 @@ describe('<Grid />', () => {
       ['0', '0', '1', '1', '1', '0', '1', '*', '*']];
     const onClickMine = jest.fn();
     const onClickCell = jest.fn();
+    const onClickFlagCell = jest.fn();
     const pressedGrid = [
+      [false, false, false, false, false, false, false, false, false],
+      [false, false, false, false, false, false, false, false, false],
+      [false, false, false, false, false, false, false, false, false],
+      [false, false, false, false, false, false, false, false, false],
+      [false, false, false, false, false, false, false, false, false],
+      [false, false, false, false, false, false, false, false, false],
+      [false, false, false, false, false, false, false, false, false],
+      [false, false, false, false, false, false, false, false, false],
+      [false, false, false, false, false, false, false, false, false],
+    ];
+    const flaggedGrid = [
       [false, false, false, false, false, false, false, false, false],
       [false, false, false, false, false, false, false, false, false],
       [false, false, false, false, false, false, false, false, false],
@@ -36,7 +48,9 @@ describe('<Grid />', () => {
       grid={grid}
       onClickMine={onClickMine}
       onClickCell={onClickCell}
+      onClickFlagCell={onClickFlagCell}
       pressedGrid={pressedGrid}
+      flaggedGrid={flaggedGrid}
     />);
   });
 

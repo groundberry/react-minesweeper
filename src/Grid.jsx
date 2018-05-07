@@ -16,8 +16,10 @@ class Grid extends Component {
       gameOver,
       grid,
       onClickCell,
+      onClickFlagCell,
       onClickMine,
       pressedGrid,
+      flaggedGrid,
     } = this.props;
 
     for (let row = 0, height = grid.length; row < height; row += 1) {
@@ -26,6 +28,7 @@ class Grid extends Component {
         const cellContent = (grid[row][col]).toString();
         const coordinates = [row, col];
         const showContent = pressedGrid[row][col];
+        const flaggedCell = flaggedGrid[row][col];
 
         arrayOfCells.push(<Cell
           key={cellIndex}
@@ -33,7 +36,9 @@ class Grid extends Component {
           content={cellContent}
           gameOver={gameOver}
           showContent={showContent}
+          flaggedCell={flaggedCell}
           onClickCell={onClickCell}
+          onClickFlagCell={onClickFlagCell}
           onClickMine={onClickMine}
         />);
       }
@@ -60,8 +65,10 @@ Grid.propTypes = {
   gameOver: PropTypes.bool.isRequired,
   grid: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)).isRequired,
   onClickCell: PropTypes.func.isRequired,
+  onClickFlagCell: PropTypes.func.isRequired,
   onClickMine: PropTypes.func.isRequired,
   pressedGrid: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.bool)).isRequired,
+  flaggedGrid: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.bool)).isRequired,
 };
 
 export default Grid;

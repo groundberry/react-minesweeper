@@ -19,11 +19,13 @@ class App extends Component {
     const level = 1;
     const grid = startGame(level);
     const pressedGrid = getPressedGrid(level);
+    const flaggedGrid = getPressedGrid(level);
 
     this.state = {
       level,
       grid,
       pressedGrid,
+      flaggedGrid,
       gameOver: false,
       winGame: false,
       startTime: null,
@@ -32,6 +34,7 @@ class App extends Component {
 
     this.handleChangeSelectLevel = this.handleChangeSelectLevel.bind(this);
     this.handleClickPressedCell = this.handleClickPressedCell.bind(this);
+    this.handleClickFlaggedCell = this.handleClickFlaggedCell.bind(this);
     this.handleClickGameOver = this.handleClickGameOver.bind(this);
     this.handleClickRestartGame = this.handleClickRestartGame.bind(this);
   }
@@ -88,6 +91,18 @@ class App extends Component {
     });
   }
 
+  handleClickFlaggedCell([row, col]) {
+    this.setState((prevState) => {
+      const newflaggedGrid = cloneGrid(prevState.flaggedGrid);
+
+      newflaggedGrid[row][col] = !newflaggedGrid[row][col];
+
+      return {
+        flaggedGrid: newflaggedGrid,
+      };
+    });
+  }
+
   handleClickGameOver() {
     this.setState((prevState) => {
       const { level } = prevState;
@@ -107,6 +122,7 @@ class App extends Component {
       return {
         grid: getGrid(level, mines),
         pressedGrid: getPressedGrid(level),
+        flaggedGrid: getPressedGrid(level),
         gameOver: false,
         startTime: null,
         endTime: null,
@@ -121,6 +137,7 @@ class App extends Component {
       winGame,
       level,
       pressedGrid,
+      flaggedGrid,
       startTime,
       endTime,
     } = this.state;
@@ -148,8 +165,10 @@ class App extends Component {
           gameOver={gameOver}
           grid={grid}
           onClickCell={this.handleClickPressedCell}
+          onClickFlagCell={this.handleClickFlaggedCell}
           onClickMine={this.handleClickGameOver}
           pressedGrid={pressedGrid}
+          flaggedGrid={flaggedGrid}
         />
       </div>
     );

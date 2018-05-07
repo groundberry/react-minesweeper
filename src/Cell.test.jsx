@@ -5,11 +5,13 @@ import Cell from './Cell';
 describe('Cell', () => {
   let onClickMine;
   let onClickCell;
+  let onClickFlagCell;
   let wrapper;
 
   beforeEach(() => {
     onClickMine = jest.fn();
     onClickCell = jest.fn();
+    onClickFlagCell = jest.fn();
   });
 
   describe('when the game is not over', () => {
@@ -21,7 +23,9 @@ describe('Cell', () => {
           gameOver={false}
           onClickMine={onClickMine}
           onClickCell={onClickCell}
+          onClickFlagCell={onClickFlagCell}
           showContent={false}
+          flaggedCell={false}
         />);
       });
 
@@ -50,7 +54,9 @@ describe('Cell', () => {
           gameOver={false}
           onClickMine={onClickMine}
           onClickCell={onClickCell}
+          onClickFlagCell={onClickFlagCell}
           showContent={false}
+          flaggedCell={false}
         />);
       });
 
@@ -75,7 +81,9 @@ describe('Cell', () => {
           gameOver={false}
           onClickMine={onClickMine}
           onClickCell={onClickCell}
+          onClickFlagCell={onClickFlagCell}
           showContent={false}
+          flaggedCell
         />);
       });
 
