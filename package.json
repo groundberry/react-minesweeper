@@ -2,9 +2,12 @@
   "name": "minesweeper",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://groundberry.github.io/react-minesweeper",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "test:lint:js": "eslint --ext=js --ext=jsx .",
     "test:lint:css": "stylelint \"**/*.css\"",
     "test:unit": "react-scripts test --env=jsdom",
@@ -27,6 +30,7 @@
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.5.1",
+    "gh-pages": "^1.2.0",
     "npm-run-all": "^4.1.2",
     "stylelint": "^8.4.0",
     "stylelint-config-standard": "^18.0.0"
