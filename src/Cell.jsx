@@ -26,9 +26,9 @@ class Cell extends Component {
 
     if (content === '*') {
       onClickMine();
+    } else {
+      onClickCell(coordinates);
     }
-
-    onClickCell(coordinates);
   }
 
   handleClickShowFlag(evt) {

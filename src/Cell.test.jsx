@@ -63,7 +63,7 @@ describe('Cell', () => {
       describe('when clicking', () => {
         it('calls the onClickCell callback', () => {
           wrapper.find('.Cell--button').simulate('click');
-          expect(onClickCell).toHaveBeenCalled();
+          expect(onClickCell).not.toHaveBeenCalled();
         });
 
         it('calls the onClickMine callback', () => {
